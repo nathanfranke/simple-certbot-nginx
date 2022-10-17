@@ -1,0 +1,24 @@
+version: "3"
+
+volumes:
+  letsencrypt:
+
+services:
+  proxy:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - letsencrypt:/etc/letsencrypt
+    depends_on:
+      certbot:
+        condition: service_completed_successfully
+
+  certbot:
+    image: certbot/dns-cloudflare
+    command: certonly --keep-until-expiring --agree-tos --no-eff-email --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini -m 'me@example.com' -d 'example.com,*.example.com'
+    volumes:
+      - ./cloudflare.ini:/cloudflare.ini
+      - letsencrypt:/etc/letsencrypt
