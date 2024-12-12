@@ -1,4 +1,6 @@
-# simple-certbot-nginx
+### ❤️ Consider using [jonasal/nginx-certbot](https://github.com/JonasAlfredsson/docker-nginx-certbot) for the HTTP-01 challenge. [See here](https://letsencrypt.org/docs/challenge-types/) for the benefits and drawbacks of each challenge type.
+
+# docker-certbot-nginx-cloudflare
 
 Usage:
 - Forward ports `80` and `443`, and route a subdomain to your server.
